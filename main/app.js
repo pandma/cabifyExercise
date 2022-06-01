@@ -6,11 +6,11 @@ const express = require("express");
 
 const app = express();
 
-require("../main/config")(app);
+require("./config")(app);
 
-const allRoutes = require("../main/routes/index.routes");
+const allRoutes = require("./routes/index.routes");
 app.use("/api", allRoutes);
 
-require("../main/error-handling")(app);
+require("./error-handling")(app);
 
 module.exports = app;
