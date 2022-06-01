@@ -3,6 +3,8 @@ const axios = require('axios');
 class MessageApp {
     constructor() {
         this.axiosApp = axios.create({ baseURL: 'http://messageapp:3000' })
+        //this.axiosApp = axios.create({ baseURL: 'http://localhost:3000' })
+
     }
 
     testMessages = () => {
@@ -14,10 +16,13 @@ class MessageApp {
         return this.axiosApp.post(`/message`, message)
 
     }
-    getOneMessage = (message) => {
-        const options = { headers: { "content-type": "application/json" } }
+    getOneMessage = (body) => {
+        let lastMessage = {
+            "destination": body.destination,
+            "body": body.message
+        }
 
-        return this.axiosApp.post(`/message`, message, options)
+        return this.axiosApp.post(`/message`, lastMessage)
     }
 }
 

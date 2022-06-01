@@ -8,15 +8,14 @@ router.get("/hello", (req, res, next) => {
 
 });
 
-router.post("/message", (req, res, next) => {
+router.post("/messages", (req, res, next) => {
 
-    const { destination, body } = req.body
+    const { destination, message } = req.body
 
     messageApp
-        .getOneMessage({ destination, body })
+        .getOneMessage({ destination, message })
         .then((response) => res.status(200).json(response.data))
-        .catch((err) => res.status(500).json(err))
-
+        .catch((err) => next(err))
 });
 
 module.exports = router;
