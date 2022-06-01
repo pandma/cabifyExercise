@@ -15,15 +15,10 @@ class MessageApp {
 
     }
     getOneMessage = (message) => {
-        let lastMessage = {
-            "destination": message.destination,
-            "body": message.body
-        }
-        console.log(lastMessage)
+        const options = { headers: { "content-type": "application/json" } }
 
-        return this.axiosApp.post(`/message`, lastMessage)
+        return this.axiosApp.post(`/message`, message, options)
     }
-
 }
 
 module.exports = MessageApp
