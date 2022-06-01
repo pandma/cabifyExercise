@@ -2,7 +2,7 @@ const axios = require('axios');
 
 class MessageApp {
     constructor() {
-        this.axiosApp = axios.create({ baseURL: 'http://localhost:3000' })
+        this.axiosApp = axios.create({ baseURL: 'http://messageapp:3000' })
     }
 
     testMessages = () => {

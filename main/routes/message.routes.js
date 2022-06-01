@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const MessageApp = require("./../apiHandler/messageApp")
+const MessageApp = require("../service/messageApp")
 const messageApp = new MessageApp()
 
 router.get("/hello", (req, res, next) => {
