@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { errorhandle } = require("../midellwares/errorHandle");
 const MessageApp = require("../service/messageApp")
 const messageApp = new MessageApp()
 
@@ -8,7 +9,7 @@ router.get("/hello", (req, res, next) => {
 
 });
 
-router.post("/messages", (req, res, next) => {
+router.post("/messages", errorhandle, (req, res, next) => {
 
     const { destination, message } = req.body
 
