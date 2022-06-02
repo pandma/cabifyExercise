@@ -1,6 +1,6 @@
 require("dotenv/config");
 
-// require("../main/db");  //=> mongoose
+require("./db");  //=> mongoose
 
 const express = require("express");
 
