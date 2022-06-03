@@ -40,7 +40,3 @@ This endpoint is our main route to get the message from the client and send it t
  
 This endpoint returned our record of every message that was sent by the client.
  
-
-
-
-
