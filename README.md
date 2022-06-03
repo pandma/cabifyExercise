@@ -16,12 +16,15 @@ between the client the message app is our api,
 
 <h2 align="center"> API Endpoints</h2>
 
+<div align="center"> 
 
 | METHOD |             URL              |       DESCRIPTION |
 | ------ | :--------------------------: | ----------------: |
 | GET    |/hello                        | test Hello World  |
 | POST   |/messages                     | post a message    |
 | GET    |/messages                     | get all messages  |
+
+</div>
 
 <h3 align="center"> What each endpoint does?</h3>
 
