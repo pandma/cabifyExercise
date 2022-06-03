@@ -1,9 +1,22 @@
 #!/bin/bash
 
-echo "hello world"
+echo "checking localhost:9001"
 
-curl -d "destination=STRING" -d  "message=STRING" http://localhost:9001/messages
 
-curl -d "fakeDescrption=STRING" -d  "message=STRING" http://localhost:9001/messages
 
-curl -d "destination=STRING" -d  "wrongMessage=STRING" http://localhost:9001/messages
+hash=$(curl -X POST http://localhost:9001/messages  -d '{"destination" : "STRING", "message" : "STRING", "number" : 333}' -H "content-type: application/json")
+ echo $hash
+
+ 
+
+
+
+# curl -X POST http://localhost:9001/messages  -d '{"fakedestination" : "STRING", "message" : "STRING"}'  -H "content-type: application/json" -v
+
+# curl -X POST http://localhost:9001/messages  -d '{"destination" : "STRING", "fakemessage" : "STRING"}'  -H "content-type: application/json" -v
+
+# curl -X POST http://localhost:9001/messages  -d '{ fakeJson : "STRING", "fakemessage" : "STRING"}'  -v
+
+#curl -X GET http://localhost:9001/messages   
+
+

@@ -1,7 +1,9 @@
 const router = require("express").Router();
-const { errorhandle } = require("../midellwares/errorHandle");
 const MessageApp = require("../service/messageApp")
+const MessageSchema = require("./../models/Message.nodel")
+const { errorhandle } = require("../midellwares/errorHandle");
 const messageApp = new MessageApp()
+
 
 router.get("/hello", (req, res, next) => {
 
@@ -11,12 +13,40 @@ router.get("/hello", (req, res, next) => {
 
 router.post("/messages", errorhandle, (req, res, next) => {
 
-    const { destination, message } = req.body
+    const { destination, message, number } = req.body
+
 
     messageApp
         .getOneMessage({ destination, message })
-        .then((response) => res.status(200).json(response.data))
-        .catch((err) => next(err))
+        .then(() => {
+            MessageSchema
+                .create({ destination, message, number })
+                .then(response => MessageSchema.findByIdAndUpdate(response.id, { status: "CONFIRMED" }))
+                .then(() => res.status(200).json({ message: "message sent correctly" }))
+                .catch((err) => next(err, { message: "message not save in DB" }))
+        })
+        .catch((err) => {
+            MessageSchema
+                .create({ destination, message, number })
+                .then(response => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
+                .then(() => res.json({ message: "the message was not sent" }))
+            console.log(err)
+        })
 });
+
+router.get("/messages", (req, res, next) => {
+
+
+    MessageSchema
+        .find()
+        .then((response) => {
+            response.length === 0 ?
+                res.status(200).json({ message: "you have no messages" })
+                :
+                res.status(200).json(response)
+        })
+        .catch((err) => next(err))
+})
+
 
 module.exports = router;
