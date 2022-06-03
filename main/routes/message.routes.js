@@ -16,7 +16,7 @@ router.post("/messages", errorhandle, (req, res, next) => {
 
 
     messageApp
-        .getOneMessage({ destination, message, number })
+        .getOneMessage({ destination, message })
         .then((response) => res.status(200).json(response.data))
         .then(() => {
             return MessageSchema
@@ -28,7 +28,7 @@ router.post("/messages", errorhandle, (req, res, next) => {
             MessageSchema
                 .create({ destination, message, number })
                 .then(response => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
-                .then(() => res.json({ message: "the message was not sent." }))
+                .then(() => res.json({ message: "the message was not sent" }))
             console.log(err)
         })
 });
