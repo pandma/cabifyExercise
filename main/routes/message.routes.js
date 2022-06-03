@@ -2,6 +2,7 @@ const router = require("express").Router();
 const MessageApp = require("../service/messageApp")
 const MessageSchema = require("./../models/Message.nodel")
 const { errorhandle } = require("../midellwares/errorHandle");
+const { populate } = require("./../models/Message.nodel");
 const messageApp = new MessageApp()
 
 
@@ -15,22 +16,25 @@ router.post("/messages", errorhandle, (req, res, next) => {
 
     const { destination, message, number } = req.body
 
+    const createMessage = MessageSchema.create({ destination, message, number })
+    const SendMessage = messageApp.getOneMessage({ destination, message })
 
-    messageApp
-        .getOneMessage({ destination, message })
-        .then(() => {
+    Promise
+        .all([createMessage, SendMessage])
+        .then((response) => {
+
             MessageSchema
-                .create({ destination, message, number })
-                .then(response => MessageSchema.findByIdAndUpdate(response.id, { status: "CONFIRMED" }))
+                .findByIdAndUpdate(response[0].id, { status: "CONFIRMED" })
                 .then(() => res.status(200).json({ message: "message sent correctly" }))
                 .catch((err) => next(err, { message: "message not save in DB" }))
         })
-        .catch((err) => {
+
+        .catch((err, response) => {
             MessageSchema
                 .create({ destination, message, number })
-                .then(response => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
+                .then(() => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
                 .then(() => res.json({ message: "the message was not sent" }))
-            console.log(err)
+            next(err)
         })
 });
 
