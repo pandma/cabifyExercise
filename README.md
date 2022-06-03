@@ -29,9 +29,11 @@ between the client the message app is our api,
 <h3 align="center"> What each endpoint does?</h3>
 
 - GET /hello :
-this endpoint is a test endpoint, it should return a Hello world message.
+
+This endpoint is a test endpoint, it should return a Hello world message.
  
 - POST /messages :
+
 This endpoint is our main route to get the message from the client and send it to the message app API, ensuring a correct error handle and saving every message in our record.
  
 - GET /messages :
