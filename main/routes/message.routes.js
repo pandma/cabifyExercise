@@ -17,11 +17,11 @@ router.post("/messages", errorhandle, (req, res, next) => {
 
     messageApp
         .getOneMessage({ destination, message })
-        .then((response) => res.status(200).json(response.data))
         .then(() => {
-            return MessageSchema
+            MessageSchema
                 .create({ destination, message, number })
                 .then(response => MessageSchema.findByIdAndUpdate(response.id, { status: "CONFIRMED" }))
+                .then(() => res.status(200).json({ message: "message sent correctly" }))
                 .catch((err) => next(err, { message: "message not save in DB" }))
         })
         .catch((err) => {
