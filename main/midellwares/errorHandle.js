@@ -1,8 +1,7 @@
+const MessageSchema = require("../models/Message.nodel")
+
+
 const errorhandle = (req, res, next) => {
-    // MessageSchema
-    //     .create({ destination, message, number })
-    //     .then(() => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
-    //     .then(() => res.json({ message: "the message was not sent" }))
 
 
     const contentType = {
@@ -22,7 +21,6 @@ const errorhandle = (req, res, next) => {
 
     !req.body.number ?
         res.status(400).json({ message: "number is incorrect" })
-
         : null
 
     next()

@@ -2,7 +2,6 @@ const router = require("express").Router();
 const MessageApp = require("../service/messageApp")
 const MessageSchema = require("./../models/Message.nodel")
 const { errorhandle } = require("../midellwares/errorHandle");
-const { populate } = require("./../models/Message.nodel");
 const messageApp = new MessageApp()
 
 
@@ -22,17 +21,26 @@ router.post("/messages", errorhandle, (req, res, next) => {
     Promise
         .all([createMessage, SendMessage])
         .then((response) => {
+            response[1].status === 200 ?
 
-            MessageSchema
-                .findByIdAndUpdate(response[0].id, { status: "CONFIRMED" })
-                .then(() => res.status(200).json({ message: "message sent correctly" }))
-                .catch((err) => next(err, { message: "message not save in DB" }))
+                MessageSchema
+                    .findByIdAndUpdate(response[0].id, { status: "CONFIRMED" })
+                    .then(() => res.status(200).json({ message: "message sent correctly" }))
+                :
+
+                MessageSchema
+                    .findByIdAndUpdate(response[0].id, { status: "REJECTED" })
+                    .then(() => res.status(200).json({ message: "message not sent" }))
         })
 
         .catch((err) => {
-            console.log("estamos en el eroor ", req.body)
 
-            next(err)
+            err.response.status === 500 || err.statusCode === 400 ?
+                MessageSchema
+                    .create({ destination, message, number })
+                    .then((response) => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
+                    .then(() => res.status(400).json({ message: "message not sent" }))
+                : next(err)
         })
 });
 
