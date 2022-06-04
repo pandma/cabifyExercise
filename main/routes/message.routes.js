@@ -21,16 +21,11 @@ router.post("/messages", errorhandle, (req, res, next) => {
     Promise
         .all([createMessage, SendMessage])
         .then((response) => {
-            response[1].status === 200 ?
 
-                MessageSchema
-                    .findByIdAndUpdate(response[0].id, { status: "CONFIRMED" })
-                    .then(() => res.status(200).json({ message: "message sent correctly" }))
-                :
+            MessageSchema
+                .findByIdAndUpdate(response[0].id, { status: "CONFIRMED" })
+                .then(() => res.status(200).json({ message: "message sent correctly" }))
 
-                MessageSchema
-                    .findByIdAndUpdate(response[0].id, { status: "REJECTED" })
-                    .then(() => res.status(200).json({ message: "message not sent" }))
         })
 
         .catch((err) => {
