@@ -1,4 +1,9 @@
 const errorhandle = (req, res, next) => {
+    // MessageSchema
+    //     .create({ destination, message, number })
+    //     .then(() => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
+    //     .then(() => res.json({ message: "the message was not sent" }))
+
 
     const contentType = {
         'Content-Type': 'application/json'
@@ -17,6 +22,7 @@ const errorhandle = (req, res, next) => {
 
     !req.body.number ?
         res.status(400).json({ message: "number is incorrect" })
+
         : null
 
     next()

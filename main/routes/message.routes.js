@@ -29,11 +29,9 @@ router.post("/messages", errorhandle, (req, res, next) => {
                 .catch((err) => next(err, { message: "message not save in DB" }))
         })
 
-        .catch((err, response) => {
-            MessageSchema
-                .create({ destination, message, number })
-                .then(() => MessageSchema.findByIdAndUpdate(response.id, { status: "REJECTED" }))
-                .then(() => res.json({ message: "the message was not sent" }))
+        .catch((err) => {
+            console.log("estamos en el eroor ", req.body)
+
             next(err)
         })
 });
