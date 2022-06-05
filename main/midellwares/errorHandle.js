@@ -1,8 +1,4 @@
-const MessageSchema = require("../models/Message.nodel")
-
-
 const errorhandle = (req, res, next) => {
-
 
     const contentType = {
         'Content-Type': 'application/json'
