@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-
 import database from "../database.js";
+import databaseCopy from "../databaseCopy.js";
 
 const budgetSchema = new mongoose.Schema({
     name: {
@@ -14,4 +14,8 @@ const budgetSchema = new mongoose.Schema({
 
 });
 
-export default database.model("Budget", budgetSchema);
+const Budget = database.model("Budget", budgetSchema);
+const Budgetcopy = databaseCopy.model("Budgetcopy", budgetSchema)
+export { Budget, Budgetcopy }
+
+

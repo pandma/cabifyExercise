@@ -47,8 +47,7 @@ export default async (req, res) => {
       res.statusCode = 500;
       const lastBudget = await getBudget()
       await updateBudget(parseInt(lastBudget[0].amount + 1))
-
-
+      console.log("we proceed to return the message import")
       res.end(`Internal server error: SERVICE ERROR ${error.message}`);
     }
   });
