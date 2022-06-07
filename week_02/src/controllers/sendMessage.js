@@ -25,10 +25,14 @@ export default async (req, res) => {
     try {
 
       const lastBudget = await getBudget()
+      console.log("last", lastBudget)
       if (lastBudget[0].amount >= 1) {
         await saveMessage({ ...req.body, status: postRes.statusCode === 200 ? "OK" : "ERROR", })
 
-        await updateBudget(lastBudget[0].amount - "1")
+        await updateBudget(parseInt(lastBudget[0].amount - 1))
+        const newBudget = await getBudget()
+
+        console.log("new", parseInt(newBudget[0].amount))
 
       } else res.json('Messsage not send add budget')
 
@@ -42,7 +46,8 @@ export default async (req, res) => {
       console.log(error.message);
       res.statusCode = 500;
       const lastBudget = await getBudget()
-      await updateBudget(lastBudget[0].amount + "1")
+      await updateBudget(parseInt(lastBudget[0].amount + 1))
+
 
       res.end(`Internal server error: SERVICE ERROR ${error.message}`);
     }
@@ -55,7 +60,8 @@ export default async (req, res) => {
     try {
       await saveMessage({ ...req.body, status: "TIMEOUT", });
       const lastBudget = await getBudget()
-      await updateBudget(lastBudget[0].amount + "1")
+      await updateBudget(parseInt(lastBudget[0].amount + 1))
+
 
     } finally {
       res.statusCode = 500;

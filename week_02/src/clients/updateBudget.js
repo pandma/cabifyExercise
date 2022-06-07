@@ -5,8 +5,9 @@ const mutex = locks.createMutex();
 
 export default async (input) => {
 
-    const id = "629df3b2fe194c0a443b8d25"
-    const update = async () => await Budget.findByIdAndUpdate(id, { amount: input })
+    const query = { name: "Budget" };
+    const update = async () => await Budget.findOneAndUpdate(query, { amount: input })
+
 
     mutex.timedLock(5000, function (error) {
         if (error) {
