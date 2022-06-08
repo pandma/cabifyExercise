@@ -24,6 +24,7 @@ export default async (req, res) => {
   postReq.on("response", async (postRes) => {
     try {
 
+
       const lastBudget = await getBudget()
       console.log("last", lastBudget)
       if (lastBudget[0].amount >= 1) {

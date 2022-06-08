@@ -23,8 +23,14 @@
     "npm": "8.3.1"
   },
   "dependencies": {
+    "@bull-board/api": "^3.11.1",
+    "@bull-board/express": "^3.11.1",
+    "@bull-board/fastify": "^3.11.1",
     "@cabify/eslint-config": "1.0.2",
+    "axios": "^0.27.2",
     "body-parser": "1.19.2",
+    "bull": "^4.8.3",
+    "bull-board": "^1.4.1",
     "eslint": "8.11.0",
     "eslint-import-resolver-jest": "3.0.2",
     "express": "4.17.3",

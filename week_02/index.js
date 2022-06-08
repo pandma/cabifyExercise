@@ -7,7 +7,8 @@ import sendMessage from "./src/controllers/sendMessage.js";
 import updateBudget from "./src/clients/updateBudget.js";
 import addBudget from "./src/controllers/addBudget.js";
 import getBudget from "./src/controllers/getBudget.js";
-
+import { sendMessageQueue } from "./src/queue/messageQueue.js";
+import addMessageQueue from "./src/controllers/addMessageQueue.js";
 const app = express();
 
 const validator = new Validator({ allErrors: true });
@@ -36,9 +37,11 @@ const budgetSchema = {
   },
 };
 
-app.post("/message", bodyParser.json(), validate({ body: messageSchema }), sendMessage);
+app.post("/message", bodyParser.json(), validate({ body: messageSchema }), addMessageQueue);
 
 app.get("/messages", getMessages);
+
+app.get("/message/:messageId/status")
 
 app.get("/credit", getBudget);
 

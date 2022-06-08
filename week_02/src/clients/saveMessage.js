@@ -6,8 +6,8 @@ export default async (messageParams) => {
 
 
   try {
-    const doc = await message.save();
-    const docCopy = await mesaggeCopy.save();
+    const doc = await Message.create(messageParams);
+    const docCopy = await MessageCopy.create(messageParams);
 
 
     console.log("Message saved succesfully:", doc);
