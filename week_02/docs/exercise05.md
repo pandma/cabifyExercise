@@ -1,13 +1,13 @@
-## exercise 4
+# exercise 4
 
-# Create a replica instance
+## Create a replica instance
 
 
 For this exercise he have Define a new Mongo instance. 
 we are using this back up to replicate the data from the main database.
 
 
-# Data replication
+## Data replication
 
 
 Budget model and message model have been updated, so it can be replicated in both databases,
@@ -16,7 +16,7 @@ The data of the backup database is being updated every time there is an even on 
 
 
 
-# Reliability of transactions
+## Reliability of transactions
 
 
 The updateBudget is the service in charge of modifying the amount of the badge, for this reason it has a lock to ensure synconity in the transactions, this serves also has to ensure that the budget is exactly the same in both backup and the main database.
