@@ -18,11 +18,11 @@ between the client the message app is our api,
 
 <div align="center"> 
 
-| METHOD |             URL              |       DESCRIPTION |
-| ------ | :--------------------------: | ----------------: |
-| GET    |/hello                        | test Hello World  |
-| POST   |/messages                     | post a message    |
-| GET    |/messages                     | get all messages  |
+| METHOD |             URL              |       DESCRIPTION           |
+| ------ | :--------------------------: | ----------------:           |
+| GET    |/hello                        | test Hello World            |
+| POST   |/messages                     | post a message              |
+| GET    |/messages                     | get all messages            |
 
 </div>
 
@@ -39,4 +39,4 @@ This endpoint is our main route to get the message from the client and send it t
 - GET /messages :
  
 This endpoint returned our record of every message that was sent by the client.
- 
+           
