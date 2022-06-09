@@ -1,4 +1,5 @@
-import { Budget, Budgetcopy } from '../models/budget.js'
+import { Budget, BudgetCopy } from '../models/budget.js'
+
 import locks from 'locks'
 const mutex = locks.createMutex();
 
@@ -7,10 +8,10 @@ export default async (input) => {
 
     const query = { name: "Budget" };
     const update = async () => await Budget.findOneAndUpdate(query, { amount: input })
-    const updateCopy = async () => await Budgetcopy.findOneAndUpdate(query, { amount: input })
+    const updateCopy = async () => await BudgetCopy.findOneAndUpdate(query, { amount: input })
     const retunBudget = async (copy) => await Budget.findOneAndUpdate(query, { amount: copy })
     const findBudget = await Budget.find()
-    const findCopyBudget = await Budgetcopy.find()
+    const findCopyBudget = await BudgetCopy.find()
 
 
     mutex.timedLock(5000, function (error) {

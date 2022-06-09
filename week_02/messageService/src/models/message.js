@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import database from "../database.js";
-import databaseCopy from "../databaseCopy.js";
+import { database } from "../database.js";
 
 
 const messageSchema = new mongoose.Schema({
@@ -10,10 +9,10 @@ const messageSchema = new mongoose.Schema({
     type: String,
     enum: ["PROCESSING", "ERROR", "OK", "TIMEOUT"],
     default: "PROCESSING"
-  },
+  }
+
 });
 
 const Message = database.model("Message", messageSchema);
-const MessageCopy = databaseCopy.model("MessageCopy", messageSchema);
 
-export { Message, MessageCopy }
+export { Message }

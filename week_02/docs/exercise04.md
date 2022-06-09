@@ -1,6 +1,6 @@
-## exercise 4
+# exercise 4
 
-# endpoints
+## endpoints
 
 | METHOD |             URL              |       DESCRIPTION | 
 | ------ | :--------------------------: | ----------------: |
@@ -9,7 +9,7 @@
 
 
 
-# post credit
+## post credit
 
 the POST /credit route has been updated, now the body is:
 {
@@ -19,7 +19,7 @@ This route is been created to let the users update ther budget valance, this way
 
 
 
-# post a message
+## post a message
 
 the POST /messege route has been updated, now the body is:
 {

@@ -4,14 +4,17 @@ import messageJob from "../process/messageJob.js";
 const REDIS_URL = "redis:6379"
 
 const messageQueue = new Queue('message', { redis: REDIS_URL });
+const budgetQueue = new Queue('budget', { redis: REDIS_URL });
+
 
 
 const sendMessageQueue = async (data) => {
 
     try {
-        messageQueue.add(messageJob(data));
+        budgetQueue.add(data);
         messageQueue.process((job, done) => {
-            job
+            console.log(job.data, "estamos en message")
+            messageJob(job)
             done();
         });
     } catch (error) {
@@ -21,6 +24,6 @@ const sendMessageQueue = async (data) => {
 };
 
 
-export { sendMessageQueue }
+export { sendMessageQueue, messageQueue, budgetQueue }
 
 

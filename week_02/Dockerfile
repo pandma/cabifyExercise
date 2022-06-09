@@ -1,5 +1,6 @@
 FROM node:latest
-ADD . /app
+ADD ./budgetService /app
+ADD ./messageService /app
 WORKDIR /app
 RUN npm install
 

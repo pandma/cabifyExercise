@@ -1,6 +1,15 @@
-# exercise 6
+# Exercise 7
 
-## endpoints
+## Endpoints Credit Service
+
+
+| METHOD |             URL              |       DESCRIPTION          | 
+| ------ | :--------------------------: | ----------------:          |
+| POST   |/credit                       | update the credit amount   |
+| GET    |/credit                       | show  the credit amount    |
+
+
+## Endpoints Message Service
 
 
 | METHOD |             URL              |       DESCRIPTION      | 
@@ -8,6 +17,10 @@
 | POST   |/message                      | post a messages        |
 | GET    |/message/:messageId/status    | show message status    |
 
+
+# Description 
+
+For this exercise we have 
 
 ## POST /message Endpoint
 
@@ -23,8 +36,3 @@ This Endpoint recives a body in JSON and responds whith the ID of the processing
 
 This Enpoint has been created to check status of this message, this way you can check if your message have been procces or havent been sent yet.
 This Enpoint response is a JSON string with a single field status that will contain the status of the message requested.
-
-
-
-
-

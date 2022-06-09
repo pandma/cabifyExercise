@@ -1,5 +1,6 @@
 import { Message } from "../models/message.js";
 
+
 export default async (req, res) => {
     const { messageId } = req.params
 

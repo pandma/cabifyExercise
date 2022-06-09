@@ -1,5 +1,5 @@
-import { Message } from "../models/message.js";
 import { sendMessageQueue } from "../queue/messageQueue.js";
+import { Message } from "../models/message.js";
 
 
 export default async (req, res) => {

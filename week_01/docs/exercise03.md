@@ -1,6 +1,6 @@
-## exercise 3
+# exercise 3
 
-# endpoints
+## endpoints
 
 | METHOD |             URL              |       DESCRIPTION | 
 | ------ | :--------------------------: | ----------------: |
@@ -9,7 +9,7 @@
 
 
 
-# record the messages
+## record the messages
 
 the POST /messeges route has been updated, now the body is:
 {
@@ -23,6 +23,6 @@ but if the message is not send I save it in the database as "REJECTED"
 
 
 
-# get the messages
+## get the messages
 
 They GET /messages endpoint wil return every message form in database, and wil return a no message error if the data base is empty.
