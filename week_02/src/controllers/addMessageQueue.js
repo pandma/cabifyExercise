@@ -14,7 +14,7 @@ export default async (req, res) => {
         console.log("Message addee to Queue")
 
 
-        res.status(200).json("message added to Queue");
+        res.status(200).json(`message added to Queue you message Id is ${amount.id}`);
 
     } catch (error) {
         const amount = await Message.create({ destination, body, status: "ERROR" });
