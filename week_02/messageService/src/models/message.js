@@ -7,8 +7,11 @@ const messageSchema = new mongoose.Schema({
   body: String,
   status: {
     type: String,
-    enum: ["PROCESSING", "ERROR", "OK", "TIMEOUT"],
+    enum: ["PROCESSING", "ERROR", "OK", "TIMEOUT", "NOT SENT"],
     default: "PROCESSING"
+  },
+  credit: {
+    type: Boolean
   }
 
 });

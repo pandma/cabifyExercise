@@ -20,19 +20,39 @@
 
 # Description 
 
-For this exercise we have 
 
-## POST /message Endpoint
-
-
-For this Endpoint we have decided to leave things for later,
-We are saving the message whith a PROCESSING status and we send it to redis Queue that will process this message later on.
-This Endpoint recives a body in JSON and responds whith the ID of the processing message.
+For this exercise we have decided to split our Service into Two Services, one service incharge of the Credit and the other in charge of sending and saving messages.
+I have budgetService which is our Credit service and messageService which is our Messages service.
 
 
+# Queues Schema
 
-## GET /message/:messageId/status
+
+<div align="center">
+<img src="https://res.cloudinary.com/dzzkeb6xp/image/upload/v1654845084/Screenshot_9_o1kakf.png" width="600" height="300"/>
+</div>
 
 
-This Enpoint has been created to check status of this message, this way you can check if your message have been procces or havent been sent yet.
-This Enpoint response is a JSON string with a single field status that will contain the status of the message requested.
+# Async queues explanation
+
+
+When the client sends a message we save the message with a PROCESSING status and respond to the client with an id of the message.
+In the moment we start an async processes that starts by adding this data in the credit Queue, this queue will check the credit valance and update the valance if needed,
+Then it returns this data to the message Queue the message queue will send the message if there is enough valance in the credit amount and will update the message depending on the messageApp response.
+STATUS:
+- "ERROR"
+- "OK"
+- "TIMEOUT"
+- "NOT SENT"
+CREDIT:
+- True
+- False
+ 
+Then the client could check the message status with the given ID.
+
+
+
+
+
+
+
