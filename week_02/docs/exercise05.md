@@ -26,4 +26,7 @@ If the main route fails, it will return an error, and it the main one works out 
 
 <h3 align="center"> Transaction Schema</h3>
 
-<img src="https://res.cloudinary.com/dzzkeb6xp/image/upload/v1654622333/Screenshot_7_btzlki.png" width="300" height="300"/> 
+
+<div align="center">
+<img src="https://res.cloudinary.com/dzzkeb6xp/image/upload/v1654622333/Screenshot_7_btzlki.png" width="500" height="300"/> 
+<div/>
