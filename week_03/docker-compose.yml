@@ -5,11 +5,11 @@ services:
   message1:
     image: message1
     environment:
-      - APPID=1111
+      - APPID=9007
     build: message/
     restart: always
-    # ports:
-    #   - "9007:80"
+    ports:
+      - "9007:9007"
     links:
       - messageapp
       - mongodb_message
@@ -25,11 +25,11 @@ services:
   message2:
     image: message2
     environment:
-      - APPID=2222
+      - APPID=9008
     build: message/
     restart: always
-    # ports:
-    #   - "9008:80"
+    ports:
+      - "9008:9008"
     links:
       - messageapp
       - mongodb_message
@@ -45,11 +45,11 @@ services:
   message3:
     image: message3
     environment:
-      - APPID=3333
+      - APPID=9009
     build: message/
     restart: always
-    # ports:
-    #   - "9009:80"
+    ports:
+      - "9009:9009"
     links:
       - messageapp
       - mongodb_message
