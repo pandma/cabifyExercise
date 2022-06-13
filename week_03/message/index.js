@@ -36,14 +36,15 @@ const messageSchema = {
   }
 };
 
-app.post(
-  "/messages",
-  bodyParser.json(),
-  validate({ body: messageSchema }),
-  sendMessage
+app.post("/messages", bodyParser.json(), validate({ body: messageSchema }), sendMessage
 );
 
 app.get("/messages", getMessages);
+
+app.get("/health", (req, res) => {
+  res.status(200).json("OK")
+});
+
 
 app.get("/message/:messageId/status", getMessageStatus);
 
@@ -56,6 +57,8 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(9007, () => {
-  console.log("App started on PORT 9007");
+const appid = process.env.APPID;
+
+app.listen(appid, () => {
+  console.log(`${appid} is listening on ${appid}`);
 });
