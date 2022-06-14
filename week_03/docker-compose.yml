@@ -90,7 +90,6 @@ services:
     image: cabify/backend-bootcamp-messageapp
     ports:
       - "3000:3000"
-
   mongodb_credit:
     image: mongo
     command: mongod --port 27017
@@ -105,7 +104,6 @@ services:
       - ./credit/data/replica:/credit/data/replica
     ports:
       - 27018:27018
-
   mongodb_message:
     image: mongo
     command: mongod --port 27027
@@ -120,7 +118,6 @@ services:
       - ./message/data/replica:/message/data/replica
     ports:
       - 27028:27028
-
   redis:
     image: redis
     container_name: redis
