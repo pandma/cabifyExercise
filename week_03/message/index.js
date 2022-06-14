@@ -9,6 +9,7 @@ import {
 import sendMessage from "./src/controllers/sendMessage.js";
 import getMessages from "./src/controllers/getMessages.js";
 import getMessageStatus from "./src/controllers/getMessageStatus.js";
+import getVersion from "./src/controllers/getVersion.js";
 
 const app = express();
 
@@ -44,6 +45,8 @@ app.get("/messages", getMessages);
 app.get("/health", (req, res) => {
   res.status(200).json("OK")
 });
+
+app.get("/version", getVersion);
 
 
 app.get("/message/:messageId/status", getMessageStatus);
