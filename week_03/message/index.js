@@ -16,7 +16,6 @@ import GetMetrics from "./src/controllers/GetMetrics.js";
 import { addToMetric, requestCounters, responseTime } from "./src/metrics/addMetrics.js";
 
 
-
 const app = express();
 
 const validator = new Validator({ allErrors: true });
@@ -43,8 +42,7 @@ const messageSchema = {
   }
 };
 
-app.post("/messages", requestCounters, bodyParser.json(), validate({ body: messageSchema }), sendMessage
-);
+app.post("/messages", requestCounters, bodyParser.json(), validate({ body: messageSchema }), sendMessage);
 
 app.get("/messages", requestCounters, getMessages);
 
