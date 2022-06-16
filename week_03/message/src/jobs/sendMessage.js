@@ -8,6 +8,7 @@ import saveMessage from "../clients/saveMessage.js";
 import Message from "../models/message.js";
 
 import urls from "../urls.js";
+import { addToMetric } from "../metrics/addMetrics.js";
 
 const random = (n) => Math.floor(Math.random() * Math.floor(n));
 
@@ -74,7 +75,7 @@ receive_queue.process(async (job, done) => {
     done();
   });
 
-  postReq.on("error", () => {});
+  postReq.on("error", () => { });
 
   postReq.write(JSON.stringify(messageData));
   postReq.end();
@@ -82,6 +83,7 @@ receive_queue.process(async (job, done) => {
 
 export default async function addJob(jobParams) {
   const messageId = uuid();
+  addToMetric("200", "Queue")
 
   const messageParams = {
     ...jobParams,

@@ -1,4 +1,6 @@
 import express from "express";
+import logger from "loglevel"
+logger.setLevel("info");
 
 import bodyParser from "body-parser";
 import {
@@ -10,6 +12,10 @@ import sendMessage from "./src/controllers/sendMessage.js";
 import getMessages from "./src/controllers/getMessages.js";
 import getMessageStatus from "./src/controllers/getMessageStatus.js";
 import getVersion from "./src/controllers/getVersion.js";
+import GetMetrics from "./src/controllers/GetMetrics.js";
+import { addToMetric, requestCounters, responseTime } from "./src/metrics/addMetrics.js";
+
+
 
 const app = express();
 
@@ -37,22 +43,25 @@ const messageSchema = {
   }
 };
 
-app.post("/messages", bodyParser.json(), validate({ body: messageSchema }), sendMessage
+app.post("/messages", requestCounters, bodyParser.json(), validate({ body: messageSchema }), sendMessage
 );
 
-app.get("/messages", getMessages);
+app.get("/messages", requestCounters, getMessages);
 
-app.get("/health", (req, res) => {
+app.get("/metrics", GetMetrics);
+
+app.get("/health", requestCounters, (req, res) => {
+  addToMetric("200", "health")
+  logger.info("OK")
   res.status(200).json("OK")
 });
 
-app.get("/version", getVersion);
+app.get("/version", requestCounters, getVersion);
 
-
-app.get("/message/:messageId/status", getMessageStatus);
+app.get("/message/:messageId/status", requestCounters, getMessageStatus);
 
 app.use((err, req, res, next) => {
-  console.log(res.body);
+  logger.info(res.body);
   if (err instanceof ValidationError) {
     res.sendStatus(400);
   } else {
@@ -63,5 +72,5 @@ app.use((err, req, res, next) => {
 const appid = process.env.APPID;
 
 app.listen(appid, () => {
-  console.log(`${appid} is listening on ${appid}`);
+  logger.info(`${appid} is listening on ${appid}`);
 });
