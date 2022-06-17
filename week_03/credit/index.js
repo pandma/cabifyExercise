@@ -1,4 +1,7 @@
 import express from "express";
+import logger from "loglevel"
+logger.setLevel("info");
+
 import bodyParser from "body-parser";
 import {
   Validator,
@@ -9,7 +12,7 @@ import newCredit from "./src/controllers/newCredit.js";
 import receiveMessage from "./src/jobs/receiveMessage.js";
 
 const app = express();
-const {validate} = new Validator({ allErrors: true });
+const { validate } = new Validator({ allErrors: true });
 
 const creditSchema = {
   type: "object",
@@ -32,7 +35,7 @@ app.post(
 );
 
 app.use((err, req, res, next) => {
-  console.log(res.body);
+  logger.info(res.body);
   if (err instanceof ValidationError) {
     res.sendStatus(400);
   } else {
@@ -43,5 +46,5 @@ app.use((err, req, res, next) => {
 receiveMessage();
 
 app.listen(9017, () => {
-  console.log("App started on PORT 9017");
+  logger.info("App started on PORT 9017");
 });
